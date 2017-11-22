@@ -6,10 +6,10 @@
 import 'config/ReactotronConfig';
 
 import React from 'react';
-import { View } from 'react-native';
+import Map from 'pages/Map';
 
 const App = () => (
-  <View />
+  <Map />
 );
 
 export default App;
