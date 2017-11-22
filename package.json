@@ -7,8 +7,12 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"prop-types": "^15.6.0",
 		"react": "16.0.0",
-		"react-native": "0.50.3"
+		"react-native": "0.50.3",
+		"reactotron-react-native": "^1.13.2",
+		"reactotron-redux": "^1.13.0",
+		"reactotron-redux-saga": "^1.13.0"
 	},
 	"devDependencies": {
 		"babel-eslint": "^8.0.2",
