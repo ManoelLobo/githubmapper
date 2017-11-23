@@ -13,13 +13,11 @@ const middleware = [sagaMiddleware];
 
 const persistConfig = { key: 'GithubMarker', storage };
 const createAdequateStore = __DEV__ ? console.tron.createStore : createStore;
-const store = createAdequateStore(
+export const store = createAdequateStore(
   persistCombineReducers(persistConfig, reducers),
   compose(applyMiddleware(...middleware)),
 );
 
-persistStore(store);
+export const persistor = persistStore(store);
 
 sagaMiddleware.run(sagas);
-
-export default store;
