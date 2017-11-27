@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Modal, Text, TouchableOpacity, View, TextInput } from 'react-native';
-import { toggleModal } from 'redux/ducks/markers';
+import { toggleModal } from 'redux/ducks/ui';
 
 import styles from './styles';
 
@@ -57,7 +57,7 @@ class AddMarkerModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  modalActive: state.markers.modal,
+  modalActive: state.ui.modal,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ toggleModal }, dispatch);

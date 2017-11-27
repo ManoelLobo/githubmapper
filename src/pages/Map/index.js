@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 import MapView from 'react-native-maps';
-import { toggleModal } from 'redux/ducks/markers';
+import { toggleModal } from 'redux/ducks/ui';
 
 import AddMarkerModal from 'components/AddPlaceModal';
 import Marker from 'components/Marker';
