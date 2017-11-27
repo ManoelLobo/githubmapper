@@ -19,7 +19,7 @@ export default function markers(state = initialState, action) {
 }
 
 // Action Creators
-export function addUser(username) {
+export function addMarker(username) {
   return {
     type: Types.SEARCH,
     payload: {
