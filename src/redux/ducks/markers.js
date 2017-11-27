@@ -11,7 +11,7 @@ export default function markers(state = initialState, action) {
     case Types.ADD:
       return [
         ...state,
-        action.payload.user,
+        { ...action.payload },
       ];
     default:
       return state;
@@ -19,11 +19,12 @@ export default function markers(state = initialState, action) {
 }
 
 // Action Creators
-export function addMarker(username) {
+export function addMarker(username, coord) {
   return {
     type: Types.SEARCH,
     payload: {
       username,
+      coord,
     },
   };
 }

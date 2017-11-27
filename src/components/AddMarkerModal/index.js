@@ -13,6 +13,10 @@ class AddMarkerModal extends Component {
     addMarker: PropTypes.func.isRequired,
     toggleModal: PropTypes.func.isRequired,
     modalActive: PropTypes.bool.isRequired,
+    coord: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+    }).isRequired,
   }
 
   state = {
@@ -54,7 +58,7 @@ class AddMarkerModal extends Component {
               <TouchableOpacity
                 style={[styles.button, styles.confirmButton]}
                 onPress={() => {
-                    this.props.addMarker(this.state.username);
+                    this.props.addMarker(this.state.username, this.props.coord);
                     this.closeModal();
                   }
                 }
@@ -71,6 +75,7 @@ class AddMarkerModal extends Component {
 
 const mapStateToProps = state => ({
   modalActive: state.ui.modal,
+  coord: state.ui.lastCoord,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ addMarker, toggleModal }, dispatch);

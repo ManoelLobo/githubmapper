@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 import MapView from 'react-native-maps';
-import { toggleModal } from 'redux/ducks/ui';
+import { toggleModal, setCoord } from 'redux/ducks/ui';
 
 import AddMarkerModal from 'components/AddMarkerModal';
 import Marker from 'components/Marker';
@@ -14,9 +14,13 @@ import styles from './styles';
 class Map extends Component {
   static propTypes ={
     toggleModal: PropTypes.func.isRequired,
+    setCoord: PropTypes.func.isRequired,
   }
 
-  test = () => {}
+  openModal = (coord) => {
+    this.props.setCoord(coord);
+    this.props.toggleModal();
+  }
 
   render() {
     return (
@@ -29,7 +33,7 @@ class Map extends Component {
             latitudeDelta: 0.0042,
             longitudeDelta: 0.0031,
           }}
-          onLongPress={() => { this.props.toggleModal(); }}
+          onLongPress={(event) => { this.openModal(event.nativeEvent.coordinate); }}
         >
           <Marker />
         </MapView>
@@ -39,6 +43,10 @@ class Map extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ toggleModal }, dispatch);
+const mapStateToProps = state => ({
+  users: state.markers,
+});
 
-export default connect(null, mapDispatchToProps)(Map);
+const mapDispatchToProps = dispatch => bindActionCreators({ toggleModal, setCoord }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
