@@ -16,6 +16,9 @@ class Map extends Component {
     toggleModal: PropTypes.func.isRequired,
     setCoord: PropTypes.func.isRequired,
     setMessage: PropTypes.func.isRequired,
+    markers: PropTypes.arrayOf(PropTypes.shape({
+      ...Marker.propTypes,
+    })).isRequired,
     message: PropTypes.string.isRequired,
   }
 
@@ -46,7 +49,13 @@ class Map extends Component {
           }}
           onLongPress={(event) => { this.openModal(event.nativeEvent.coordinate); }}
         >
-          <Marker />
+          {this.props.markers.map(({ user, coord }) => (
+            <Marker
+              key={`${user.id}.${Math.random()}`}
+              user={user}
+              coord={coord}
+            />
+          ))}
         </MapView>
         <AddMarkerModal />
       </View>
@@ -55,7 +64,7 @@ class Map extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.markers,
+  markers: state.markers,
   message: state.ui.message,
 });
 
