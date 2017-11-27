@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import MapView from 'react-native-maps';
-import { toggleModal, setCoord } from 'redux/ducks/ui';
+import { toggleModal, setCoord, setMessage } from 'redux/ducks/ui';
 
 import AddMarkerModal from 'components/AddMarkerModal';
 import Marker from 'components/Marker';
@@ -15,11 +15,22 @@ class Map extends Component {
   static propTypes ={
     toggleModal: PropTypes.func.isRequired,
     setCoord: PropTypes.func.isRequired,
+    setMessage: PropTypes.func.isRequired,
+    message: PropTypes.string.isRequired,
+  }
+
+  componentDidUpdate() {
+    if (this.props.message.length) this.showMessage(this.props.message);
   }
 
   openModal = (coord) => {
     this.props.setCoord(coord);
     this.props.toggleModal();
+  }
+
+  showMessage = async (message) => {
+    await Alert.alert(message);
+    this.props.setMessage('');
   }
 
   render() {
@@ -45,8 +56,13 @@ class Map extends Component {
 
 const mapStateToProps = state => ({
   users: state.markers,
+  message: state.ui.message,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ toggleModal, setCoord }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  toggleModal,
+  setCoord,
+  setMessage,
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);
