@@ -11,6 +11,7 @@ const initialState = {
   lastCoord: {},
   message: '',
 };
+
 export default function ui(state = initialState, action) {
   switch (action.type) {
     case Types.MODAL_TOGGLE:

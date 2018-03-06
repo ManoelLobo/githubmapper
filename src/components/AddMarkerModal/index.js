@@ -24,8 +24,12 @@ class AddMarkerModal extends Component {
   }
 
   closeModal = () => {
-    this.setState({ username: '' });
+    this.saveUsernameToState('');
     this.props.toggleModal();
+  }
+
+  saveUsernameToState = (username) => {
+    this.setState({ username });
   }
 
   render() {
@@ -43,19 +47,21 @@ class AddMarkerModal extends Component {
               style={styles.input}
               placeholder="Usuário no Github"
               value={this.state.username}
-              onChangeText={username => this.setState({ username })}
+              onChangeText={this.saveUsernameToState}
               autoCapitalize="none"
               autoCorrect={false}
               underlineColorAndroid="transparent"
             />
             <View style={styles.buttonContainer}>
               <TouchableOpacity
+                id="close"
                 style={[styles.button, styles.cancelButton]}
                 onPress={() => { this.closeModal(); }}
               >
                 <Text style={styles.buttonText}>Cancelar</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                id="add"
                 style={[styles.button, styles.confirmButton]}
                 onPress={() => {
                     this.props.addMarker(this.state.username, this.props.coord);
