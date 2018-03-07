@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import sinon from 'sinon';
 
-import { TextInput } from 'react-native';
+import { Modal, TextInput } from 'react-native';
 
 import AddMarkerModal from 'components/AddMarkerModal';
 
@@ -51,5 +51,11 @@ describe('Testing Modal to add Marker', () => {
     wrapper.dive().find({ id: 'close' }).simulate('press');
 
     expect(store.getActions()).toContainEqual(toggleModal());
+  });
+
+  it('does nothing on request close', () => {
+    const wrapper = createWrapper();
+
+    wrapper.dive().find(Modal).simulate('requestClose');
   });
 });

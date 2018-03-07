@@ -7,6 +7,8 @@ export const Types = {
 // Reducer
 const initialState = [];
 export default function markers(state = initialState, action) {
+  if (!action) return state;
+
   switch (action.type) {
     case Types.ADD:
       return [

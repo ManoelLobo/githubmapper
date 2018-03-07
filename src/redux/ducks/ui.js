@@ -13,6 +13,8 @@ const initialState = {
 };
 
 export default function ui(state = initialState, action) {
+  if (!action) return state;
+
   switch (action.type) {
     case Types.MODAL_TOGGLE:
       return { ...state, modal: !state.modal };
